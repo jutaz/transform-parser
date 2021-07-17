@@ -1,0 +1,19 @@
+{
+  "name": "@jutaz/transform-parser",
+  "version": "1.0.0",
+  "description": "Parser for CSS/SVG transform attribute",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jutaz/transform-parser.git"
+  },
+  "author": "Justas @jutaz Brazauskas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jutaz/transform-parser/issues"
+  },
+  "homepage": "https://github.com/jutaz/transform-parser#readme"
+}
