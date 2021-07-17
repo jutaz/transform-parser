@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parser should parse multiple operations 1`] = `
+Array [
+  Object {
+    "type": "translate",
+    "x": Object {
+      "unit": null,
+      "value": 2508,
+    },
+    "y": Object {
+      "unit": null,
+      "value": 32,
+    },
+    "z": null,
+  },
+  Object {
+    "type": "scale",
+    "x": -1,
+    "y": 1,
+    "z": null,
+  },
+  Object {
+    "type": "translate",
+    "x": Object {
+      "unit": null,
+      "value": -2508,
+    },
+    "y": Object {
+      "unit": null,
+      "value": -32,
+    },
+    "z": null,
+  },
+  Object {
+    "type": "translate",
+    "x": Object {
+      "unit": null,
+      "value": 2482,
+    },
+    "y": Object {
+      "unit": null,
+      "value": 1,
+    },
+    "z": null,
+  },
+]
+`;

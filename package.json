@@ -16,6 +16,9 @@
     "url": "https://github.com/jutaz/transform-parser/issues"
   },
   "homepage": "https://github.com/jutaz/transform-parser#readme",
+  "dependencies": {
+    "nearley": "^2.20.1"
+  },
   "devDependencies": {
     "jest": "^27.0.6"
   }
