@@ -40,13 +40,19 @@ Parses a CSS/SVG transform attribute string.
 
 Each transform is represented as an object with a `type` and relevant properties:
 
-- **Translate:** `{ type: 'translate', x: number|array|null, y: number|array|null, z: number|object|null }`
-- **Scale:** `{ type: 'scale', x: number|null, y: number|null, z: number|null }`
+- **Translate:** `{ type: 'translate', x: number|array|object|null, y: number|array|object|null, z: number|object|null }`
+- **Scale:** `{ type: 'scale', x: number|object|null, y: number|object|null, z: number|object|null }`
 - **Rotate:** `{ type: 'rotate', x: object|null, y: object|null, z: object|null }`
 - **Rotate3D:** `{ type: 'rotate3d', x: number, y: number, z: number, angle: object }`
 - **Skew:** `{ type: 'skew', x: object|null, y: object|null }`
 - **Matrix:** `{ type: 'matrix', matrix: [number, number, number, number, number, number] }`
 - **Matrix3D:** `{ type: 'matrix3d', matrix: [number x 16] }`
+- **Perspective:** `{ type: 'perspective', value: object|string }`
+
+#### Var and Calc Objects
+
+- **Var:** `{ type: 'var', name: string, fallback: object|null }`
+- **Calc:** `{ type: 'calc', expression: string }`
 
 #### Units and Values
 
@@ -66,6 +72,12 @@ On parsing errors, returns an object: `{ error: true, message: string }`.
 - `skew(ax, ay?)` / `skewX(ax)` / `skewY(ay)`
 - `matrix(a, b, c, d, e, f)`
 - `matrix3d(a1, b1, c1, d1, a2, b2, c2, d2, a3, b3, c3, d3, a4, b4, c4, d4)`
+- `perspective(length | none)`
+
+### Modern CSS Features
+
+- **CSS Custom Properties:** `var(--name)` or `var(--name, fallback)`
+- **CSS Calculations:** `calc(expression)`
 
 ### Supported Units
 
@@ -115,6 +127,20 @@ parse('translate(2508px, 32px) scale(-1, 1) rotate(180deg)');
 //   { type: 'translate', x: [{ value: 2508, unit: 'px' }], y: [{ value: 32, unit: 'px' }], z: null },
 //   { type: 'scale', x: -1, y: 1, z: null },
 //   { type: 'rotate', x: null, y: null, z: { value: 180, unit: 'deg' } }
+// ]
+```
+
+### Modern CSS Features
+
+```javascript
+parse('translate(var(--x), calc(10px + 5%))');
+// [
+//   { type: 'translate', x: [{ type: 'var', name: '--x', fallback: null }], y: [{ type: 'calc', expression: '10px + 5%' }], z: null }
+// ]
+
+parse('scale(var(--scale, 1.5))');
+// [
+//   { type: 'scale', x: { type: 'var', name: '--scale', fallback: 1.5 }, y: null, z: null }
 // ]
 ```
 

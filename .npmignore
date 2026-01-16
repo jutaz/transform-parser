@@ -1,3 +1,14 @@
 *.test.js
 *.ne
 __snapshots__
+.gitignore
+.npmignore
+.nvmrc
+.prettierrc.js
+.eslintrc.js
+.github/
+docs/
+coverage/
+.nyc_output/
+package-lock.json
+.aider*
