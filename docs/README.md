@@ -1,7 +1,6 @@
 # transform-parser
 
 [![npm version](https://badge.fury.io/js/%40jutaz%2Ftransform-parser.svg)](https://badge.fury.io/js/%40jutaz%2Ftransform-parser)
-[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://jutaz.github.io/transform-parser/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A robust parser for CSS/SVG `transform` attributes, built with [Nearley](https://nearley.js.org/). It parses transform strings into structured JavaScript objects, supporting all standard 2D and 3D transforms with proper unit handling.
