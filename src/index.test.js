@@ -553,6 +553,278 @@ describe('parser', () => {
         ]
       ]);
     });
+
+    test('multiple newlines and mixed whitespace', () => {
+      expect(parser.parse('translate(\n\n10px\t,\n  20px\n\t)')).toEqual([
+        [
+          {
+            type: 'translate',
+            x: [{ value: 10, unit: [['px']], location: expect.any(Number) }],
+            y: undefined,
+            z: null,
+            location: expect.any(Number)
+          }
+        ]
+      ]);
+    });
+
+    test('whitespace in complex chains', () => {
+      expect(parser.parse('translate(10px)\n\tscale(2)\n  rotate(45deg)')).toEqual([
+        [
+          { type: 'translate', x: [{ value: 10, unit: [['px']], location: expect.any(Number) }], y: undefined, z: null, location: expect.any(Number) }
+        ],
+        [
+          { type: 'scale', x: 2, y: undefined, z: null, location: expect.any(Number) }
+        ],
+        [
+          { type: 'rotate', x: null, y: null, z: { value: 45, unit: [['deg']], location: expect.any(Number) }, location: expect.any(Number) }
+        ]
+      ]);
+    });
+  });
+
+  // Extreme numbers and precision
+  describe('extreme numbers and precision', () => {
+    test('very large numbers', () => {
+      expect(parser.parse('translate(999999999999px)')).toEqual([
+        [
+          { type: 'translate', x: [{ value: 999999999999, unit: [['px']], location: expect.any(Number) }], y: undefined, z: null, location: expect.any(Number) }
+        ]
+      ]);
+    });
+
+    test('very small decimals', () => {
+      expect(parser.parse('scale(0.0000001, 0.000001)')).toEqual([
+        [
+          { type: 'scale', x: 0.0000001, y: undefined, z: null, location: expect.any(Number) }
+        ]
+      ]);
+    });
+
+    test('large negative numbers', () => {
+      expect(parser.parse('translate(-1000000000px, -500000000em)')).toEqual([
+        [
+          {
+            type: 'translate',
+            x: [{ value: -1000000000, unit: [['px']], location: expect.any(Number) }],
+            y: undefined,
+            z: null,
+            location: expect.any(Number)
+          }
+        ]
+      ]);
+    });
+
+    test('maximum safe integer', () => {
+      const maxSafe = Number.MAX_SAFE_INTEGER;
+      expect(parser.parse(`translate(${maxSafe}px)`)).toEqual([
+        [
+          { type: 'translate', x: [{ value: maxSafe, unit: [['px']], location: expect.any(Number) }], y: undefined, z: null, location: expect.any(Number) }
+        ]
+      ]);
+    });
+
+    test('minimum safe integer', () => {
+      const minSafe = Number.MIN_SAFE_INTEGER;
+      expect(parser.parse(`translate(${minSafe}px)`)).toEqual([
+        [
+          { type: 'translate', x: [{ value: minSafe, unit: [['px']], location: expect.any(Number) }], y: undefined, z: null, location: expect.any(Number) }
+        ]
+      ]);
+    });
+
+    test('high precision decimals', () => {
+      expect(parser.parse('rotate(45.123456789deg)')).toEqual([
+        [
+          { type: 'rotate', x: null, y: null, z: { value: 45.123456789, unit: [['deg']], location: expect.any(Number) }, location: expect.any(Number) }
+        ]
+      ]);
+    });
+  });
+
+  // Mixed units
+  describe('mixed units', () => {
+    test('translate with mixed length units', () => {
+      expect(parser.parse('translate(10px, 20em)')).toEqual([
+        [
+          {
+            type: 'translate',
+            x: [{ value: 10, unit: [['px']], location: expect.any(Number) }],
+            y: undefined,
+            z: null,
+            location: expect.any(Number)
+          }
+        ]
+      ]);
+    });
+
+    test('translate3d with mixed units', () => {
+      expect(parser.parse('translate3d(10px, 20%, 5vh)')).toEqual([
+        [
+          {
+            type: 'translate',
+            x: [{ value: 10, unit: [['px']], location: expect.any(Number) }],
+            y: 0.2,
+            z: { value: 5, unit: [['vh']], location: expect.any(Number) },
+            location: expect.any(Number)
+          }
+        ]
+      ]);
+    });
+
+    test('perspective with different length units', () => {
+      expect(parser.parse('perspective(1000px)')).toEqual([
+        [
+          { type: 'perspective', value: [{ value: 1000, unit: [['px']], location: expect.any(Number) }], location: expect.any(Number) }
+        ]
+      ]);
+    });
+
+    test('skew with mixed angle units', () => {
+      expect(parser.parse('skew(10deg, 20rad)')).toEqual([
+        [
+          {
+            type: 'skew',
+            x: { value: 10, unit: [['deg']], location: expect.any(Number) },
+            y: { value: 20, unit: [['rad']], location: expect.any(Number) },
+            location: expect.any(Number)
+          }
+        ]
+      ]);
+    });
+
+    test('rotate3d with different angle units', () => {
+      expect(parser.parse('rotate3d(1, 0, 0, 90deg)')).toEqual([
+        [
+          {
+            type: 'rotate3d',
+            x: 1,
+            y: 0,
+            z: 0,
+            angle: { value: 90, unit: [['deg']], location: expect.any(Number) },
+            location: expect.any(Number)
+          }
+        ]
+      ]);
+    });
+  });
+
+  // Complex transform chains
+  describe('complex transform chains', () => {
+    test('long chain of all transform types', () => {
+      expect(parser.parse('translate(10px, 20px) scale(2, 0.5) rotate(45deg) skew(10deg, 5deg) matrix(1, 0, 0, 1, 0, 0) perspective(1000px)')).toEqual([
+        [
+          {
+            type: 'translate',
+            x: [{ value: 10, unit: [['px']], location: expect.any(Number) }],
+            y: undefined,
+            z: null,
+            location: expect.any(Number)
+          }
+        ],
+        [
+          { type: 'scale', x: 2, y: undefined, z: null, location: expect.any(Number) }
+        ],
+        [
+          { type: 'rotate', x: null, y: null, z: { value: 45, unit: [['deg']], location: expect.any(Number) }, location: expect.any(Number) }
+        ],
+        [
+          {
+            type: 'skew',
+            x: { value: 10, unit: [['deg']], location: expect.any(Number) },
+            y: { value: 5, unit: [['deg']], location: expect.any(Number) },
+            location: expect.any(Number)
+          }
+        ],
+        [
+          { type: 'matrix', matrix: [1, 0, 0, 1, 0, 0], location: expect.any(Number) }
+        ],
+        [
+          { type: 'perspective', value: [{ value: 1000, unit: [['px']], location: expect.any(Number) }], location: expect.any(Number) }
+        ]
+      ]);
+    });
+
+    test('very long chain with 10 transforms', () => {
+      const chain = 'translate(1px) scale(1.1) rotate(1deg) translateX(2px) scaleX(1.2) rotateX(2deg) translateY(3px) scaleY(1.3) rotateY(3deg) translateZ(4px)';
+      const result = parser.parse(chain);
+      expect(result).toHaveLength(10);
+      expect(result.every(transform => Array.isArray(transform) && transform.length === 1)).toBe(true);
+    });
+
+    test('mixed 3d transforms chain', () => {
+      expect(parser.parse('translate3d(10px, 20px, 5px) scale3d(2, 1.5, 0.8) rotate3d(1, 1, 1, 45deg)')).toEqual([
+        [
+          {
+            type: 'translate',
+            x: [{ value: 10, unit: [['px']], location: expect.any(Number) }],
+            y: [{ value: 20, unit: [['px']], location: expect.any(Number) }],
+            z: { value: 5, unit: [['px']], location: expect.any(Number) },
+            location: expect.any(Number)
+          }
+        ],
+        [
+          { type: 'scale', x: 2, y: 1.5, z: 0.8, location: expect.any(Number) }
+        ],
+        [
+          {
+            type: 'rotate3d',
+            x: 1,
+            y: 1,
+            z: 1,
+            angle: { value: 45, unit: [['deg']], location: expect.any(Number) },
+            location: expect.any(Number)
+          }
+        ]
+      ]);
+    });
+  });
+
+  // All supported units
+  describe('all supported units', () => {
+    describe('length units', () => {
+      const lengthUnits = ['px', 'em', 'rem', 'vh', 'vw', 'vmin', 'vmax', 'cm', 'mm', 'in', 'pt', 'pc'];
+
+      lengthUnits.forEach(unit => {
+        test(`translate with ${unit}`, () => {
+          expect(parser.parse(`translate(10${unit})`)).toEqual([
+            [
+              { type: 'translate', x: [{ value: 10, unit: [[unit]], location: expect.any(Number) }], y: undefined, z: null, location: expect.any(Number) }
+            ]
+          ]);
+        });
+      });
+    });
+
+    describe('angle units', () => {
+      const angleUnits = ['deg', 'rad', 'grad', 'turn'];
+
+      angleUnits.forEach(unit => {
+        test(`rotate with ${unit}`, () => {
+          expect(parser.parse(`rotate(45${unit})`)).toEqual([
+            [
+              { type: 'rotate', x: null, y: null, z: { value: 45, unit: [[unit]], location: expect.any(Number) }, location: expect.any(Number) }
+            ]
+          ]);
+        });
+      });
+    });
+
+    test('percentage in translate', () => {
+      expect(parser.parse('translate(50%)')).toEqual([
+        [
+          { type: 'translate', x: 0.5, y: undefined, z: null, location: expect.any(Number) }
+        ]
+      ]);
+    });
+
+    test('percentage in scale', () => {
+      expect(parser.parse('scale(150%)')).toEqual([
+        [
+          { type: 'scale', x: 1.5, y: undefined, z: null, location: expect.any(Number) }
+        ]
+      ]);
+    });
   });
 
   // Error scenarios
@@ -674,6 +946,36 @@ describe('parser', () => {
         expect(typeof result).toBe('object');
         expect(result.error === true || Array.isArray(result)).toBe(true);
       }
+    });
+  });
+
+  describe('snapshot tests', () => {
+    test('translate with units', () => {
+      expect(parser.parse('translate(10px, 20em)')).toMatchSnapshot();
+    });
+
+    test('scale and rotate', () => {
+      expect(parser.parse('scale(2) rotate(45deg)')).toMatchSnapshot();
+    });
+
+    test('matrix', () => {
+      expect(parser.parse('matrix(1, 0, 0, 1, 10, 20)')).toMatchSnapshot();
+    });
+
+    test('perspective', () => {
+      expect(parser.parse('perspective(1000px)')).toMatchSnapshot();
+    });
+
+    test('skew', () => {
+      expect(parser.parse('skew(10deg, 20deg)')).toMatchSnapshot();
+    });
+
+    test('rotate3d', () => {
+      expect(parser.parse('rotate3d(1, 0, 0, 90deg)')).toMatchSnapshot();
+    });
+
+    test('complex chain', () => {
+      expect(parser.parse('translate3d(10px, 20px, 5px) scale(2, 1.5) rotate(45deg)')).toMatchSnapshot();
     });
   });
 });

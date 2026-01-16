@@ -1,48 +1,217 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`parser should parse multiple operations 1`] = `
-Array [
-  Object {
-    "type": "translate",
-    "x": Object {
-      "unit": null,
-      "value": 2508,
+exports[`parser snapshot tests complex chain 1`] = `
+[
+  [
+    {
+      "location": 0,
+      "type": "translate",
+      "x": [
+        {
+          "location": 12,
+          "unit": [
+            [
+              "px",
+            ],
+          ],
+          "value": 10,
+        },
+      ],
+      "y": [
+        {
+          "location": 18,
+          "unit": [
+            [
+              "px",
+            ],
+          ],
+          "value": 20,
+        },
+      ],
+      "z": {
+        "location": 24,
+        "unit": [
+          [
+            "px",
+          ],
+        ],
+        "value": 5,
+      },
     },
-    "y": Object {
-      "unit": null,
-      "value": 32,
+  ],
+  [
+    {
+      "location": 29,
+      "type": "scale",
+      "x": 2,
+      "y": undefined,
+      "z": null,
     },
-    "z": null,
-  },
-  Object {
-    "type": "scale",
-    "x": -1,
-    "y": 1,
-    "z": null,
-  },
-  Object {
-    "type": "translate",
-    "x": Object {
-      "unit": null,
-      "value": -2508,
+  ],
+  [
+    {
+      "location": 43,
+      "type": "rotate",
+      "x": null,
+      "y": null,
+      "z": {
+        "location": 50,
+        "unit": [
+          [
+            "deg",
+          ],
+        ],
+        "value": 45,
+      },
     },
-    "y": Object {
-      "unit": null,
-      "value": -32,
+  ],
+]
+`;
+
+exports[`parser snapshot tests matrix 1`] = `
+[
+  [
+    {
+      "location": 0,
+      "matrix": [
+        1,
+        0,
+        0,
+        1,
+        10,
+        20,
+      ],
+      "type": "matrix",
     },
-    "z": null,
-  },
-  Object {
-    "type": "translate",
-    "x": Object {
-      "unit": null,
-      "value": 2482,
+  ],
+]
+`;
+
+exports[`parser snapshot tests perspective 1`] = `
+[
+  [
+    {
+      "location": 0,
+      "type": "perspective",
+      "value": [
+        {
+          "location": 12,
+          "unit": [
+            [
+              "px",
+            ],
+          ],
+          "value": 1000,
+        },
+      ],
     },
-    "y": Object {
-      "unit": null,
-      "value": 1,
+  ],
+]
+`;
+
+exports[`parser snapshot tests rotate3d 1`] = `
+[
+  [
+    {
+      "angle": {
+        "location": 18,
+        "unit": [
+          [
+            "deg",
+          ],
+        ],
+        "value": 90,
+      },
+      "location": 0,
+      "type": "rotate3d",
+      "x": 1,
+      "y": 0,
+      "z": 0,
     },
-    "z": null,
-  },
+  ],
+]
+`;
+
+exports[`parser snapshot tests scale and rotate 1`] = `
+[
+  [
+    {
+      "location": 0,
+      "type": "scale",
+      "x": 2,
+      "y": undefined,
+      "z": null,
+    },
+  ],
+  [
+    {
+      "location": 9,
+      "type": "rotate",
+      "x": null,
+      "y": null,
+      "z": {
+        "location": 16,
+        "unit": [
+          [
+            "deg",
+          ],
+        ],
+        "value": 45,
+      },
+    },
+  ],
+]
+`;
+
+exports[`parser snapshot tests skew 1`] = `
+[
+  [
+    {
+      "location": 0,
+      "type": "skew",
+      "x": {
+        "location": 5,
+        "unit": [
+          [
+            "deg",
+          ],
+        ],
+        "value": 10,
+      },
+      "y": {
+        "location": 12,
+        "unit": [
+          [
+            "deg",
+          ],
+        ],
+        "value": 20,
+      },
+    },
+  ],
+]
+`;
+
+exports[`parser snapshot tests translate with units 1`] = `
+[
+  [
+    {
+      "location": 0,
+      "type": "translate",
+      "x": [
+        {
+          "location": 10,
+          "unit": [
+            [
+              "px",
+            ],
+          ],
+          "value": 10,
+        },
+      ],
+      "y": undefined,
+      "z": null,
+    },
+  ],
 ]
 `;

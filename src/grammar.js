@@ -1,4 +1,4 @@
-// Generated automatically by nearley, version undefined
+// Generated automatically by nearley, version 2.20.1
 // http://github.com/Hardmath123/nearley
 (function () {
 function id(x) { return x[0]; }
@@ -6,14 +6,14 @@ var grammar = {
     Lexer: undefined,
     ParserRules: [
     {"name": "_$ebnf$1", "symbols": []},
-    {"name": "_$ebnf$1", "symbols": ["wschar", "_$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", "wschar"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null;}},
     {"name": "__$ebnf$1", "symbols": ["wschar"]},
-    {"name": "__$ebnf$1", "symbols": ["wschar", "__$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", "wschar"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": function(d) {return null;}},
     {"name": "wschar", "symbols": [/[ \t\n\v\f]/], "postprocess": id},
     {"name": "unsigned_int$ebnf$1", "symbols": [/[0-9]/]},
-    {"name": "unsigned_int$ebnf$1", "symbols": [/[0-9]/, "unsigned_int$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "unsigned_int$ebnf$1", "symbols": ["unsigned_int$ebnf$1", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "unsigned_int", "symbols": ["unsigned_int$ebnf$1"], "postprocess": 
         function(d) {
             return parseInt(d[0].join(""));
@@ -24,7 +24,7 @@ var grammar = {
     {"name": "int$ebnf$1", "symbols": ["int$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "int$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "int$ebnf$2", "symbols": [/[0-9]/]},
-    {"name": "int$ebnf$2", "symbols": [/[0-9]/, "int$ebnf$2"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "int$ebnf$2", "symbols": ["int$ebnf$2", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "int", "symbols": ["int$ebnf$1", "int$ebnf$2"], "postprocess": 
         function(d) {
             if (d[0]) {
@@ -35,9 +35,9 @@ var grammar = {
         }
         },
     {"name": "unsigned_decimal$ebnf$1", "symbols": [/[0-9]/]},
-    {"name": "unsigned_decimal$ebnf$1", "symbols": [/[0-9]/, "unsigned_decimal$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "unsigned_decimal$ebnf$1", "symbols": ["unsigned_decimal$ebnf$1", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "unsigned_decimal$ebnf$2$subexpression$1$ebnf$1", "symbols": [/[0-9]/]},
-    {"name": "unsigned_decimal$ebnf$2$subexpression$1$ebnf$1", "symbols": [/[0-9]/, "unsigned_decimal$ebnf$2$subexpression$1$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "unsigned_decimal$ebnf$2$subexpression$1$ebnf$1", "symbols": ["unsigned_decimal$ebnf$2$subexpression$1$ebnf$1", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "unsigned_decimal$ebnf$2$subexpression$1", "symbols": [{"literal":"."}, "unsigned_decimal$ebnf$2$subexpression$1$ebnf$1"]},
     {"name": "unsigned_decimal$ebnf$2", "symbols": ["unsigned_decimal$ebnf$2$subexpression$1"], "postprocess": id},
     {"name": "unsigned_decimal$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
@@ -52,9 +52,9 @@ var grammar = {
     {"name": "decimal$ebnf$1", "symbols": [{"literal":"-"}], "postprocess": id},
     {"name": "decimal$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "decimal$ebnf$2", "symbols": [/[0-9]/]},
-    {"name": "decimal$ebnf$2", "symbols": [/[0-9]/, "decimal$ebnf$2"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "decimal$ebnf$2", "symbols": ["decimal$ebnf$2", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "decimal$ebnf$3$subexpression$1$ebnf$1", "symbols": [/[0-9]/]},
-    {"name": "decimal$ebnf$3$subexpression$1$ebnf$1", "symbols": [/[0-9]/, "decimal$ebnf$3$subexpression$1$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "decimal$ebnf$3$subexpression$1$ebnf$1", "symbols": ["decimal$ebnf$3$subexpression$1$ebnf$1", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "decimal$ebnf$3$subexpression$1", "symbols": [{"literal":"."}, "decimal$ebnf$3$subexpression$1$ebnf$1"]},
     {"name": "decimal$ebnf$3", "symbols": ["decimal$ebnf$3$subexpression$1"], "postprocess": id},
     {"name": "decimal$ebnf$3", "symbols": [], "postprocess": function(d) {return null;}},
@@ -75,16 +75,16 @@ var grammar = {
     {"name": "jsonfloat$ebnf$1", "symbols": [{"literal":"-"}], "postprocess": id},
     {"name": "jsonfloat$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "jsonfloat$ebnf$2", "symbols": [/[0-9]/]},
-    {"name": "jsonfloat$ebnf$2", "symbols": [/[0-9]/, "jsonfloat$ebnf$2"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "jsonfloat$ebnf$2", "symbols": ["jsonfloat$ebnf$2", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "jsonfloat$ebnf$3$subexpression$1$ebnf$1", "symbols": [/[0-9]/]},
-    {"name": "jsonfloat$ebnf$3$subexpression$1$ebnf$1", "symbols": [/[0-9]/, "jsonfloat$ebnf$3$subexpression$1$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "jsonfloat$ebnf$3$subexpression$1$ebnf$1", "symbols": ["jsonfloat$ebnf$3$subexpression$1$ebnf$1", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "jsonfloat$ebnf$3$subexpression$1", "symbols": [{"literal":"."}, "jsonfloat$ebnf$3$subexpression$1$ebnf$1"]},
     {"name": "jsonfloat$ebnf$3", "symbols": ["jsonfloat$ebnf$3$subexpression$1"], "postprocess": id},
     {"name": "jsonfloat$ebnf$3", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "jsonfloat$ebnf$4$subexpression$1$ebnf$1", "symbols": [/[+-]/], "postprocess": id},
     {"name": "jsonfloat$ebnf$4$subexpression$1$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "jsonfloat$ebnf$4$subexpression$1$ebnf$2", "symbols": [/[0-9]/]},
-    {"name": "jsonfloat$ebnf$4$subexpression$1$ebnf$2", "symbols": [/[0-9]/, "jsonfloat$ebnf$4$subexpression$1$ebnf$2"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
+    {"name": "jsonfloat$ebnf$4$subexpression$1$ebnf$2", "symbols": ["jsonfloat$ebnf$4$subexpression$1$ebnf$2", /[0-9]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "jsonfloat$ebnf$4$subexpression$1", "symbols": [/[eE]/, "jsonfloat$ebnf$4$subexpression$1$ebnf$1", "jsonfloat$ebnf$4$subexpression$1$ebnf$2"]},
     {"name": "jsonfloat$ebnf$4", "symbols": ["jsonfloat$ebnf$4$subexpression$1"], "postprocess": id},
     {"name": "jsonfloat$ebnf$4", "symbols": [], "postprocess": function(d) {return null;}},
@@ -98,201 +98,284 @@ var grammar = {
             );
         }
         },
+    {"name": "transformList$ebnf$1", "symbols": []},
     {"name": "transformList$ebnf$1$subexpression$1", "symbols": ["_", "transformFunction"]},
-    {"name": "transformList$ebnf$1", "symbols": ["transformList$ebnf$1$subexpression$1"]},
-    {"name": "transformList$ebnf$1$subexpression$2", "symbols": ["_", "transformFunction"]},
-    {"name": "transformList$ebnf$1", "symbols": ["transformList$ebnf$1$subexpression$2", "transformList$ebnf$1"], "postprocess": function arrconcat(d) {return [d[0]].concat(d[1]);}},
-    {"name": "transformList", "symbols": ["transformList$ebnf$1"], "postprocess": d => Array.isArray(d[0]) ? d[0].map((f) => f[1][0]) : null},
+    {"name": "transformList$ebnf$1", "symbols": ["transformList$ebnf$1", "transformList$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "transformList", "symbols": ["transformFunction", "transformList$ebnf$1"], "postprocess": (d, location) => d[1] ? [d[0]].concat(d[1].map(x => x[1])) : [d[0]]},
     {"name": "transformFunction", "symbols": ["matrix"]},
+    {"name": "transformFunction", "symbols": ["matrix3d"]},
+    {"name": "transformFunction", "symbols": ["translate3d"]},
     {"name": "transformFunction", "symbols": ["translate"]},
     {"name": "transformFunction", "symbols": ["translateX"]},
     {"name": "transformFunction", "symbols": ["translateY"]},
+    {"name": "transformFunction", "symbols": ["translateZ"]},
+    {"name": "transformFunction", "symbols": ["scale3d"]},
     {"name": "transformFunction", "symbols": ["scale"]},
     {"name": "transformFunction", "symbols": ["scaleX"]},
     {"name": "transformFunction", "symbols": ["scaleY"]},
-    {"name": "transformFunction", "symbols": ["rotate"]},
-    {"name": "transformFunction", "symbols": ["skew"]},
-    {"name": "transformFunction", "symbols": ["skewX"]},
-    {"name": "transformFunction", "symbols": ["skewY"]},
-    {"name": "transformFunction", "symbols": ["matrix3d"]},
-    {"name": "transformFunction", "symbols": ["translate3d"]},
-    {"name": "transformFunction", "symbols": ["translateZ"]},
-    {"name": "transformFunction", "symbols": ["scale3d"]},
     {"name": "transformFunction", "symbols": ["scaleZ"]},
     {"name": "transformFunction", "symbols": ["rotate3d"]},
+    {"name": "transformFunction", "symbols": ["rotate"]},
     {"name": "transformFunction", "symbols": ["rotateX"]},
     {"name": "transformFunction", "symbols": ["rotateY"]},
     {"name": "transformFunction", "symbols": ["rotateZ"]},
-    {"name": "transformFunction", "symbols": ["perspective"], "postprocess": d => d[0][0]},
-    {"name": "matrix$subexpression$1", "symbols": [/[mM]/, /[aA]/, /[tT]/, /[rR]/, /[iI]/, /[xX]/], "postprocess": function (e){return e.join("")}},
-    {"name": "matrix", "symbols": ["matrix$subexpression$1", "_", {"literal":"(","pos":122}, "_", "number", "_", {"literal":",","pos":130}, "_", "number", "_", {"literal":",","pos":138}, "_", "number", "_", {"literal":",","pos":146}, "_", "number", "_", {"literal":",","pos":154}, "_", "number", "_", {"literal":",","pos":162}, "_", "number", "_", {"literal":")","pos":170}], "postprocess": 
-        d => ({
+    {"name": "transformFunction", "symbols": ["skew"]},
+    {"name": "transformFunction", "symbols": ["skewX"]},
+    {"name": "transformFunction", "symbols": ["skewY"]},
+    {"name": "transformFunction", "symbols": ["perspective"], "postprocess": function(d) { return d; }},
+    {"name": "matrix$subexpression$1", "symbols": [/[mM]/, /[aA]/, /[tT]/, /[rR]/, /[iI]/, /[xX]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "matrix", "symbols": ["matrix$subexpression$1", {"literal":"("}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":")"}], "postprocess": 
+        (d, location) => ({
             type: "matrix",
-            matrix: [d[4][0], d[8][0], d[12][0], d[16][0], d[20][0], d[24][0]]
+            matrix: [d[3], d[7], d[11], d[15], d[19], d[23]],
+            location
         })
         },
-    {"name": "translate$subexpression$1", "symbols": [/[tT]/, /[rR]/, /[aA]/, /[nN]/, /[sS]/, /[lL]/, /[aA]/, /[tT]/, /[eE]/], "postprocess": function (e){return e.join("")}},
-    {"name": "translate$subexpression$2$subexpression$1", "symbols": [{"literal":",","pos":193}, "_", "lengthPercentage", "_"]},
+    {"name": "translate$subexpression$1", "symbols": [/[tT]/, /[rR]/, /[aA]/, /[nN]/, /[sS]/, /[lL]/, /[aA]/, /[tT]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "translate$subexpression$2$subexpression$1", "symbols": [{"literal":","}, "_", "lengthPercentage", "_"]},
     {"name": "translate$subexpression$2", "symbols": ["translate$subexpression$2$subexpression$1"]},
-    {"name": "translate$subexpression$2", "symbols": ["_"]},
-    {"name": "translate", "symbols": ["translate$subexpression$1", "_", {"literal":"(","pos":183}, "_", "lengthPercentage", "_", "translate$subexpression$2", {"literal":")","pos":207}], "postprocess": 
-             d => ({
+    {"name": "translate$subexpression$2", "symbols": []},
+    {"name": "translate", "symbols": ["translate$subexpression$1", {"literal":"("}, "_", "lengthPercentage", "_", "translate$subexpression$2", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "translate",
-                 x: d[4][0],
-                 y: d[6][0] !== null ? d[6][0][2][0] : null,
-        z: null
+                 x: d[3],
+                 y: d[5] !== null ? d[5][2] : null,
+        z: null,
+                 location
              })
         },
-    {"name": "translateX$subexpression$1", "symbols": [/[tT]/, /[rR]/, /[aA]/, /[nN]/, /[sS]/, /[lL]/, /[aA]/, /[tT]/, /[eE]/, /[xX]/], "postprocess": function (e){return e.join("")}},
-    {"name": "translateX", "symbols": ["translateX$subexpression$1", "_", {"literal":"(","pos":220}, "_", "lengthPercentage", "_", {"literal":")","pos":228}], "postprocess": 
-             d => ({
+    {"name": "translateX$subexpression$1", "symbols": [/[tT]/, /[rR]/, /[aA]/, /[nN]/, /[sS]/, /[lL]/, /[aA]/, /[tT]/, /[eE]/, /[xX]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "translateX", "symbols": ["translateX$subexpression$1", {"literal":"("}, "_", "lengthPercentage", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "translate",
-                 x: d[4][0],
+                 x: d[3],
         y: null,
-        z: null
+        z: null,
+                 location
              })
         },
-    {"name": "translateY$subexpression$1", "symbols": [/[tT]/, /[rR]/, /[aA]/, /[nN]/, /[sS]/, /[lL]/, /[aA]/, /[tT]/, /[eE]/, /[yY]/], "postprocess": function (e){return e.join("")}},
-    {"name": "translateY", "symbols": ["translateY$subexpression$1", "_", {"literal":"(","pos":241}, "_", "lengthPercentage", "_", {"literal":")","pos":249}], "postprocess": 
-             d => ({
+    {"name": "translateY$subexpression$1", "symbols": [/[tT]/, /[rR]/, /[aA]/, /[nN]/, /[sS]/, /[lL]/, /[aA]/, /[tT]/, /[eE]/, /[yY]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "translateY", "symbols": ["translateY$subexpression$1", {"literal":"("}, "_", "lengthPercentage", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "translate",
         x: null,
-                 y: d[4][0],
-        z: null
+                 y: d[3],
+        z: null,
+                 location
              })
         },
-    {"name": "scale$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/], "postprocess": function (e){return e.join("")}},
-    {"name": "scale$subexpression$2$subexpression$1", "symbols": [{"literal":",","pos":270}, "_", "number", "_"]},
+    {"name": "scale$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "scale$subexpression$2$subexpression$1", "symbols": [{"literal":","}, "_", "scaleNumber", "_"]},
     {"name": "scale$subexpression$2", "symbols": ["scale$subexpression$2$subexpression$1"]},
-    {"name": "scale$subexpression$2", "symbols": ["_"]},
-    {"name": "scale", "symbols": ["scale$subexpression$1", "_", {"literal":"(","pos":262}, "_", "number", "scale$subexpression$2", "_", {"literal":")","pos":286}], "postprocess": 
-             d => ({
+    {"name": "scale$subexpression$2", "symbols": []},
+    {"name": "scale", "symbols": ["scale$subexpression$1", {"literal":"("}, "_", "scaleNumber", "_", "scale$subexpression$2", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "scale",
-                 x: d[4],
-                 y: d[5][0] !== null ? d[5][0][2] : null,
-        z: null
+                 x: d[3],
+                 y: d[5] !== null ? d[5][2] : null,
+        z: null,
+                 location
              })
         },
-    {"name": "scaleX$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, /[xX]/], "postprocess": function (e){return e.join("")}},
-    {"name": "scaleX", "symbols": ["scaleX$subexpression$1", "_", {"literal":"(","pos":299}, "_", "number", "_", {"literal":")","pos":307}], "postprocess": 
-             d => ({
+    {"name": "scaleX$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, /[xX]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "scaleX", "symbols": ["scaleX$subexpression$1", {"literal":"("}, "_", "scaleNumber", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "scale",
-                 x: d[4],
+                 x: d[3],
                  y: null,
-        z: null
+        z: null,
+                 location
              })
         },
-    {"name": "scaleY$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, /[yY]/], "postprocess": function (e){return e.join("")}},
-    {"name": "scaleY", "symbols": ["scaleY$subexpression$1", "_", {"literal":"(","pos":320}, "_", "number", "_", {"literal":")","pos":328}], "postprocess": 
-             d => ({
+    {"name": "scaleY$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, /[yY]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "scaleY", "symbols": ["scaleY$subexpression$1", {"literal":"("}, "_", "scaleNumber", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "scale",
                  x: null,
-                 y: d[4],
-        z: null
+                 y: d[3],
+        z: null,
+                 location
              })
         },
-    {"name": "rotate$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/], "postprocess": function (e){return e.join("")}},
-    {"name": "rotate", "symbols": ["rotate$subexpression$1", "_", {"literal":"(","pos":341}, "_", "angle", "_", {"literal":")","pos":349}], "postprocess": 
-             d => ({
-                 type: "rotate",
-        x: null,
-                 y: null,
-        z: d[4]
-             })
+    {"name": "rotate$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "rotate", "symbols": ["rotate$subexpression$1", {"literal":"("}, "_", "axis", "_", "angle", "_", {"literal":")"}], "postprocess": 
+        (d, location) => {
+            let axis = d[3];
+            let angle = d[5];
+            return {
+                type: "rotate",
+                x: axis === 'x' ? angle : null,
+                y: axis === 'y' ? angle : null,
+                z: axis === 'z' ? angle : null,
+                location
+            };
+        }
         },
-    {"name": "skew$subexpression$1", "symbols": [/[sS]/, /[kK]/, /[eE]/, /[wW]/], "postprocess": function (e){return e.join("")}},
-    {"name": "skew$ebnf$1$subexpression$1", "symbols": [{"literal":",","pos":371}, "_", "angle", "_"]},
+    {"name": "rotate$subexpression$2", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "rotate", "symbols": ["rotate$subexpression$2", {"literal":"("}, "_", "angle", "_", {"literal":")"}], "postprocess": 
+        (d, location) => ({
+            type: "rotate",
+            x: null,
+            y: null,
+            z: d[3],
+            location
+        })
+        },
+    {"name": "skew$subexpression$1", "symbols": [/[sS]/, /[kK]/, /[eE]/, /[wW]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "skew$ebnf$1$subexpression$1", "symbols": [{"literal":","}, "_", "angle", "_"]},
     {"name": "skew$ebnf$1", "symbols": ["skew$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "skew$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "skew", "symbols": ["skew$subexpression$1", "_", {"literal":"(","pos":362}, "_", "angle", "_", "skew$ebnf$1", {"literal":")","pos":381}], "postprocess": 
-             d => ({
+    {"name": "skew", "symbols": ["skew$subexpression$1", {"literal":"("}, "_", "angle", "_", "skew$ebnf$1", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "skew",
-        x: d[4],
-                 y: d[6] !== null ? d[6][2] : null
+        x: d[3],
+                 y: d[5] !== null ? d[5][2] : null,
+                 location
              })
         },
-    {"name": "skewX$subexpression$1", "symbols": [/[sS]/, /[kK]/, /[eE]/, /[wW]/, /[xX]/], "postprocess": function (e){return e.join("")}},
-    {"name": "skewX", "symbols": ["skewX$subexpression$1", "_", {"literal":"(","pos":394}, "_", "angle", "_", {"literal":")","pos":402}], "postprocess": 
-             d => ({
+    {"name": "skewX$subexpression$1", "symbols": [/[sS]/, /[kK]/, /[eE]/, /[wW]/, /[xX]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "skewX", "symbols": ["skewX$subexpression$1", {"literal":"("}, "_", "angle", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "skew",
-        x: d[4],
-                 y: null
+        x: d[3],
+                 y: null,
+                 location
              })
         },
-    {"name": "skewY$subexpression$1", "symbols": [/[sS]/, /[kK]/, /[eE]/, /[wW]/, /[yY]/], "postprocess": function (e){return e.join("")}},
-    {"name": "skewY", "symbols": ["skewY$subexpression$1", "_", {"literal":"(","pos":415}, "_", "angle", "_", {"literal":")","pos":423}], "postprocess": 
-             d => ({
+    {"name": "skewY$subexpression$1", "symbols": [/[sS]/, /[kK]/, /[eE]/, /[wW]/, /[yY]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "skewY", "symbols": ["skewY$subexpression$1", {"literal":"("}, "_", "angle", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "skew",
         x: null,
-                 y: d[4]
+                 y: d[3],
+                 location
              })
         },
-    {"name": "matrix3d$subexpression$1", "symbols": [/[mM]/, /[aA]/, /[tT]/, /[rR]/, /[iI]/, /[xX]/, {"literal":"3"}, /[dD]/], "postprocess": function (e){return e.join("")}},
-    {"name": "matrix3d", "symbols": ["matrix3d$subexpression$1", "_", {"literal":"(","pos":435}, "_", "number", "_", {"literal":",","pos":443}, "_", "number", "_", {"literal":",","pos":451}, "_", "number", "_", {"literal":",","pos":459}, "_", "number", "_", {"literal":",","pos":467}, "_", "number", "_", {"literal":",","pos":475}, "_", "number", "_", {"literal":",","pos":483}, "_", "number", "_", {"literal":",","pos":491}, "_", "number", "_", {"literal":",","pos":499}, "_", "number", "_", {"literal":",","pos":507}, "_", "number", "_", {"literal":",","pos":515}, "_", "number", "_", {"literal":",","pos":523}, "_", "number", "_", {"literal":",","pos":531}, "_", "number", "_", {"literal":",","pos":539}, "_", "number", "_", {"literal":",","pos":547}, "_", "number", "_", {"literal":",","pos":555}, "_", "number", "_", {"literal":")","pos":563}]},
+    {"name": "matrix3d$subexpression$1", "symbols": [/[mM]/, /[aA]/, /[tT]/, /[rR]/, /[iI]/, /[xX]/, {"literal":"3"}, /[dD]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "matrix3d", "symbols": ["matrix3d$subexpression$1", {"literal":"("}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":")"}], "postprocess": 
+        (d, location) => ({
+            type: "matrix3d",
+            matrix: [d[3], d[7], d[11], d[15], d[19], d[23], d[27], d[31], d[35], d[39], d[43], d[47], d[51], d[55], d[59], d[63]],
+            location
+        })
+        },
     {"name": "translate3d$string$1", "symbols": [{"literal":"t"}, {"literal":"r"}, {"literal":"a"}, {"literal":"n"}, {"literal":"s"}, {"literal":"l"}, {"literal":"a"}, {"literal":"t"}, {"literal":"e"}, {"literal":"3"}, {"literal":"d"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "translate3d", "symbols": ["translate3d$string$1", "_", {"literal":"(","pos":573}, "_", "lengthPercentage", "_", {"literal":",","pos":581}, "_", "lengthPercentage", "_", {"literal":",","pos":589}, "_", "length", "_", {"literal":")","pos":597}]},
+    {"name": "translate3d", "symbols": ["translate3d$string$1", {"literal":"("}, "_", "lengthPercentage", "_", {"literal":","}, "_", "lengthPercentage", "_", {"literal":","}, "_", "length", "_", {"literal":")"}], "postprocess": 
+        (d, location) => ({
+            type: "translate",
+            x: d[3],
+            y: d[7],
+            z: d[11],
+            location
+        })
+        },
     {"name": "translateZ$string$1", "symbols": [{"literal":"t"}, {"literal":"r"}, {"literal":"a"}, {"literal":"n"}, {"literal":"s"}, {"literal":"l"}, {"literal":"a"}, {"literal":"t"}, {"literal":"e"}, {"literal":"Z"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "translateZ", "symbols": ["translateZ$string$1", "_", {"literal":"(","pos":607}, "_", "lengthPercentage", "_", {"literal":")","pos":615}], "postprocess": 
-             d => ({
+    {"name": "translateZ", "symbols": ["translateZ$string$1", {"literal":"("}, "_", "lengthPercentage", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "translate",
         x: null,
                  y: null,
-        z: d[4][0]
+        z: d[3],
+                 location
              })
         },
-    {"name": "scale3d$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, {"literal":"3"}, /[dD]/], "postprocess": function (e){return e.join("")}},
-    {"name": "scale3d", "symbols": ["scale3d$subexpression$1", "_", {"literal":"(","pos":628}, "_", "number", "_", {"literal":",","pos":636}, "_", "number", "_", {"literal":",","pos":644}, "_", "number", "_", {"literal":")","pos":652}]},
-    {"name": "scaleZ$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, /[zZ]/], "postprocess": function (e){return e.join("")}},
-    {"name": "scaleZ", "symbols": ["scaleZ$subexpression$1", "_", {"literal":"(","pos":663}, "_", "number", "_", {"literal":")","pos":671}], "postprocess": 
-             d => ({
+    {"name": "scale3d$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, {"literal":"3"}, /[dD]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "scale3d", "symbols": ["scale3d$subexpression$1", {"literal":"("}, "_", "scaleNumber", "_", {"literal":","}, "_", "scaleNumber", "_", {"literal":","}, "_", "scaleNumber", "_", {"literal":")"}], "postprocess": 
+        (d, location) => ({
+            type: "scale",
+            x: d[3],
+            y: d[7],
+            z: d[11],
+            location
+        })
+        },
+    {"name": "scale3d$subexpression$2", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, {"literal":"3"}, /[dD]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "scale3d", "symbols": ["scale3d$subexpression$2", {"literal":"("}, "_", "scaleNumber", "_", {"literal":","}, "_", "scaleNumber", "_", {"literal":","}, "_", "scaleNumber", "_", {"literal":")"}], "postprocess": 
+        (d, location) => ({
+            type: "scale",
+            x: d[3],
+            y: d[7],
+            z: d[11],
+            location
+        })
+        },
+    {"name": "scaleZ$subexpression$1", "symbols": [/[sS]/, /[cC]/, /[aA]/, /[lL]/, /[eE]/, /[zZ]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "scaleZ", "symbols": ["scaleZ$subexpression$1", {"literal":"("}, "_", "scaleNumber", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "scale",
                  x: null,
                  y: null,
-        z: d[4]
+        z: d[3],
+                 location
              })
         },
-    {"name": "rotate3d$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, {"literal":"3"}, /[dD]/], "postprocess": function (e){return e.join("")}},
-    {"name": "rotate3d", "symbols": ["rotate3d$subexpression$1", "_", {"literal":"(","pos":684}, "_", "number", "_", {"literal":",","pos":692}, "_", "number", "_", {"literal":",","pos":700}, "_", "number", "_", {"literal":",","pos":708}, "_", "angle", "_", {"literal":")","pos":716}]},
-    {"name": "rotateX$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, /[xX]/], "postprocess": function (e){return e.join("")}},
-    {"name": "rotateX", "symbols": ["rotateX$subexpression$1", "_", {"literal":"(","pos":727}, "_", "angle", "_", {"literal":")","pos":735}], "postprocess": 
-             d => ({
+    {"name": "rotate3d$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, {"literal":"3"}, /[dD]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "rotate3d", "symbols": ["rotate3d$subexpression$1", {"literal":"("}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "number", "_", {"literal":","}, "_", "angle", "_", {"literal":")"}], "postprocess": 
+        (d, location) => ({
+            type: "rotate3d",
+            x: d[3],
+            y: d[7],
+            z: d[11],
+            angle: d[15],
+            location
+        })
+        },
+    {"name": "rotateX$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, /[xX]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "rotateX", "symbols": ["rotateX$subexpression$1", {"literal":"("}, "_", "angle", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "rotate",
-        x: d[4],
+        x: d[3],
                  y: null,
-        z: null
+        z: null,
+                 location
              })
         },
-    {"name": "rotateY$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, /[yY]/], "postprocess": function (e){return e.join("")}},
-    {"name": "rotateY", "symbols": ["rotateY$subexpression$1", "_", {"literal":"(","pos":748}, "_", "angle", "_", {"literal":")","pos":756}], "postprocess": 
-             d => ({
+    {"name": "rotateY$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, /[yY]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "rotateY", "symbols": ["rotateY$subexpression$1", {"literal":"("}, "_", "angle", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "rotate",
         x: null,
-                 y: d[4],
-        z: null
+                 y: d[3],
+        z: null,
+                 location
              })
         },
-    {"name": "rotateZ$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, /[zZ]/], "postprocess": function (e){return e.join("")}},
-    {"name": "rotateZ", "symbols": ["rotateZ$subexpression$1", "_", {"literal":"(","pos":769}, "_", "angle", "_", {"literal":")","pos":777}], "postprocess": 
-             d => ({
+    {"name": "rotateZ$subexpression$1", "symbols": [/[rR]/, /[oO]/, /[tT]/, /[aA]/, /[tT]/, /[eE]/, /[zZ]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "rotateZ", "symbols": ["rotateZ$subexpression$1", {"literal":"("}, "_", "angle", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "rotate",
         x: null,
                  y: null,
-        z: d[4]
+        z: d[3],
+                 location
              })
         },
-    {"name": "perspective$subexpression$1", "symbols": [/[pP]/, /[eE]/, /[rR]/, /[sS]/, /[pP]/, /[eE]/, /[cC]/, /[tT]/, /[iI]/, /[vV]/, /[eE]/], "postprocess": function (e){return e.join("")}},
-    {"name": "perspective", "symbols": ["perspective$subexpression$1", "_", {"literal":"(","pos":790}, "_", "length", "_", {"literal":")","pos":798}], "postprocess": 
-             d => ({
+    {"name": "perspective$subexpression$1", "symbols": [/[pP]/, /[eE]/, /[rR]/, /[sS]/, /[pP]/, /[eE]/, /[cC]/, /[tT]/, /[iI]/, /[vV]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "perspective$subexpression$2", "symbols": ["length"]},
+    {"name": "perspective$subexpression$2$subexpression$1", "symbols": [/[nN]/, /[oO]/, /[nN]/, /[eE]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "perspective$subexpression$2", "symbols": ["perspective$subexpression$2$subexpression$1"]},
+    {"name": "perspective", "symbols": ["perspective$subexpression$1", {"literal":"("}, "_", "perspective$subexpression$2", "_", {"literal":")"}], "postprocess": 
+             (d, location) => ({
                  type: "perspective",
-        value: d[4][0]
+        value: d[3] === "none" ? "none" : d[3],
+                 location
              })
         },
+    {"name": "axis$subexpression$1", "symbols": [/[xX]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "axis", "symbols": ["axis$subexpression$1"]},
+    {"name": "axis$subexpression$2", "symbols": [/[yY]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "axis", "symbols": ["axis$subexpression$2"]},
+    {"name": "axis$subexpression$3", "symbols": [/[zZ]/], "postprocess": function(d) {return d.join(""); }},
+    {"name": "axis", "symbols": ["axis$subexpression$3"]},
+    {"name": "scaleNumber", "symbols": ["number"], "postprocess": d => Array.isArray(d[0]) ? d[0][0] : d[0]},
+    {"name": "scaleNumber", "symbols": ["percentage"], "postprocess": d => d[0]},
     {"name": "angle$ebnf$1$subexpression$1", "symbols": ["angleUnit"]},
     {"name": "angle$ebnf$1", "symbols": ["angle$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "angle$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "angle", "symbols": ["number", "angle$ebnf$1"], "postprocess":  d => ({
+    {"name": "angle", "symbols": ["number", "angle$ebnf$1"], "postprocess":  (d, location) => ({
         	value: Array.isArray(d[0]) ? d[0][0] : d[0],
-           unit: d[1] !== null ? d[1][0][0] : null // allow assuming default unit.
+           unit: d[1] !== null ? d[1] : null,
+           location
         }) },
     {"name": "angleUnit$string$1", "symbols": [{"literal":"d"}, {"literal":"e"}, {"literal":"g"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "angleUnit", "symbols": ["angleUnit$string$1"]},
@@ -309,9 +392,10 @@ var grammar = {
     {"name": "length$ebnf$1$subexpression$1", "symbols": ["fontRelativeLengthUnit"]},
     {"name": "length$ebnf$1", "symbols": ["length$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "length$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "length", "symbols": ["number", "length$ebnf$1"], "postprocess":  d => ({
+    {"name": "length", "symbols": ["number", "length$ebnf$1"], "postprocess":  (d, location) => ({
         	value: Array.isArray(d[0]) ? d[0][0] : d[0],
-           unit: d[1] !== null ? d[1][0][0] : null // allow assuming default unit.
+           unit: d[1] !== null ? d[1] : null,
+           location
         }) },
     {"name": "absoluteLengthUnit$string$1", "symbols": [{"literal":"p"}, {"literal":"x"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "absoluteLengthUnit", "symbols": ["absoluteLengthUnit$string$1"]},
@@ -319,7 +403,7 @@ var grammar = {
     {"name": "absoluteLengthUnit", "symbols": ["absoluteLengthUnit$string$2"]},
     {"name": "absoluteLengthUnit$string$3", "symbols": [{"literal":"m"}, {"literal":"m"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "absoluteLengthUnit", "symbols": ["absoluteLengthUnit$string$3"]},
-    {"name": "absoluteLengthUnit", "symbols": [{"literal":"Q","pos":884}]},
+    {"name": "absoluteLengthUnit", "symbols": [{"literal":"Q"}]},
     {"name": "absoluteLengthUnit$string$4", "symbols": [{"literal":"i"}, {"literal":"n"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "absoluteLengthUnit", "symbols": ["absoluteLengthUnit$string$4"]},
     {"name": "absoluteLengthUnit$string$5", "symbols": [{"literal":"p"}, {"literal":"c"}], "postprocess": function joiner(d) {return d.join('');}},
