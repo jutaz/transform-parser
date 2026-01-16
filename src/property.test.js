@@ -9,98 +9,7 @@ function stringifyValue(v) {
   return v;
 }
 
-function transformsToString(transforms) {
-  return transforms.map(transform => {
-    switch (transform.type) {
-      case 'translate': {
-        const x = transform.x ? stringifyValue(transform.x) : null;
-        const y = transform.y ? stringifyValue(transform.y) : null;
-        const z = transform.z ? stringifyValue(transform.z) : null;
-        if (z) return `translate3d(${x}, ${y}, ${z})`;
-        else if (y) return `translate(${x}, ${y})`;
-        else return `translate(${x})`;
-      }
-      case 'translateX': {
-        return `translateX(${stringifyValue(transform.x)})`;
-      }
-      case 'translateY': {
-        return `translateY(${stringifyValue(transform.y)})`;
-      }
-      case 'translateZ': {
-        return `translateZ(${stringifyValue(transform.z)})`;
-      }
-      case 'translate3d': {
-        const x = stringifyValue(transform.x);
-        const y = stringifyValue(transform.y);
-        const z = stringifyValue(transform.z);
-        return `translate3d(${x}, ${y}, ${z})`;
-      }
-      case 'scale': {
-        const sx = transform.x ? stringifyValue(transform.x) : null;
-        const sy = transform.y ? stringifyValue(transform.y) : null;
-        const sz = transform.z ? stringifyValue(transform.z) : null;
-        if (sz) return `scale3d(${sx}, ${sy}, ${sz})`;
-        else if (sy) return `scale(${sx}, ${sy})`;
-        else return `scale(${sx})`;
-      }
-      case 'scaleX': {
-        return `scaleX(${stringifyValue(transform.x)})`;
-      }
-      case 'scaleY': {
-        return `scaleY(${stringifyValue(transform.y)})`;
-      }
-      case 'scaleZ': {
-        return `scaleZ(${stringifyValue(transform.z)})`;
-      }
-      case 'scale3d': {
-        const sx = stringifyValue(transform.x);
-        const sy = stringifyValue(transform.y);
-        const sz = stringifyValue(transform.z);
-        return `scale3d(${sx}, ${sy}, ${sz})`;
-      }
-      case 'rotate': {
-        const x = transform.x ? stringifyValue(transform.x) : null;
-        const y = transform.y ? stringifyValue(transform.y) : null;
-        const z = transform.z ? stringifyValue(transform.z) : null;
-        if (z) return `rotateZ(${z})`;
-        else if (y) return `rotateY(${y})`;
-        else return `rotate(${x})`;
-      }
-      case 'rotateX': {
-        return `rotateX(${stringifyValue(transform.x)})`;
-      }
-      case 'rotateY': {
-        return `rotateY(${stringifyValue(transform.y)})`;
-      }
-      case 'rotateZ': {
-        return `rotateZ(${stringifyValue(transform.z)})`;
-      }
-      case 'skew': {
-        const x = transform.x ? stringifyValue(transform.x) : null;
-        const y = transform.y ? stringifyValue(transform.y) : null;
-        if (x && y) return `skew(${x}, ${y})`;
-        else if (x) return `skewX(${x})`;
-        else return `skewY(${y})`;
-      }
-      case 'skewX': {
-        return `skewX(${stringifyValue(transform.x)})`;
-      }
-      case 'skewY': {
-        return `skewY(${stringifyValue(transform.y)})`;
-      }
-      case 'matrix': {
-        const values = transform.values ? transform.values : [transform.a, transform.b, transform.c, transform.d, transform.e, transform.f];
-        return `matrix(${values.map(stringifyValue).join(', ')})`;
-      }
-      case 'matrix3d': {
-        const values = transform.values.map(stringifyValue).join(', ');
-        return `matrix3d(${values})`;
-      }
-      default:
-        return '';
-    }
-  }).join(' ');
-}
+
 
 // Arbitraries for generating valid inputs
 const lengthUnit = fc.oneof(
@@ -134,16 +43,6 @@ const angleUnit = fc.oneof(
 
 const numberValue = fc.integer({ min: -100, max: 100 });
 const positiveNumberValue = fc.integer({ min: 1, max: 100 });
-
-const lengthValue = fc.record({
-  value: numberValue,
-  unit: lengthUnit
-});
-
-const angleValue = fc.record({
-  value: numberValue,
-  unit: angleUnit
-});
 
 const translateArb = fc.oneof(
   // translate(x y)
@@ -193,21 +92,6 @@ const skewArb = fc.oneof(
     return `skew(${stringifyValue(x)}, ${stringifyValue(y)})`;
   })
 );
-
-const matrixArb = fc.tuple(
-  fc.integer({ min: -10, max: 10 }), // a
-  fc.integer({ min: -10, max: 10 }), // b
-  fc.integer({ min: -10, max: 10 }), // c
-  fc.integer({ min: -10, max: 10 }), // d
-  fc.integer({ min: -10, max: 10 }), // e
-  fc.integer({ min: -10, max: 10 })  // f
-).map(([a, b, c, d, e, f]) => {
-  return `matrix(${a}, ${b}, ${c}, ${d}, ${e}, ${f})`;
-});
-
-const matrix3dArb = fc.array(fc.integer({ min: -10, max: 10 }), { minLength: 16, maxLength: 16 }).map(values => {
-  return `matrix3d(${values.join(', ')})`;
-});
 
 const transformArb = fc.oneof(translateArb, scaleArb, rotateArb, skewArb);
 

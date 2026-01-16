@@ -2,7 +2,7 @@ const styled = require('styled-components').default;
 const styledEmotion = require('@emotion/styled').default;
 const parser = require('./index');
 
-const { StyleSheet, css: aphroditeCss } = require('aphrodite/no-important');
+const { StyleSheet } = require('aphrodite/no-important');
 const { css: glamorCss } = require('glamor');
 
 // Helper function to convert parsed transform array to CSS string

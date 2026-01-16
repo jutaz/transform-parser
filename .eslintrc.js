@@ -10,12 +10,13 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
   },
-  ignorePatterns: ['src/grammar.js'],
+  ignorePatterns: ['src/grammar.js', 'src/types.test.ts'],
   overrides: [
     {
       files: ['**/*.test.js'],
       env: {
         jest: true,
+        browser: true,
       },
     },
   ],
